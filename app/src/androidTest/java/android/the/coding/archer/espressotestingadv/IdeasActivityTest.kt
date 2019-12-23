@@ -14,10 +14,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class IdeasActivityTest {
     @Rule @JvmField
-    var activityRule = ActivityTestRule(IdeasActivity::class.java)
+    var activityRule = ActivityTestRule(IdeasActivity::class.java, true, false)
 
     @Test
     fun noTheme() {
+        activityRule.launchActivity(null)
         onView(withId(R.id.theme))
             .check(matches(withText(R.string.missing_theme)))
     }
