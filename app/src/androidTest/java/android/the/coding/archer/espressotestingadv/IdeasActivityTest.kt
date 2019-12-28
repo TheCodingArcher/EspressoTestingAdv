@@ -1,6 +1,7 @@
 package android.the.coding.archer.espressotestingadv
 
 import android.content.Intent
+import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
@@ -26,11 +27,14 @@ class IdeasActivityTest {
 
     @Test
     fun punny() {
+        val context = InstrumentationRegistry.getTargetContext()
+        val theme = context.getString(R.string.theme_punny)
+
         val intent = Intent()
-        intent.putExtra(IdeasActivity.KEY_THEME, "Punny")
+        intent.putExtra(IdeasActivity.KEY_THEME, theme)
         activityRule.launchActivity(intent)
 
         onView(withId(R.id.theme))
-            .check(matches(withText("Punny")))
+            .check(matches(withText(theme)))
     }
 }
