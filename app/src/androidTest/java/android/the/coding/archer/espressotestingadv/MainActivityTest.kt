@@ -1,5 +1,7 @@
 package android.the.coding.archer.espressotestingadv
 
+import android.app.Activity
+import android.app.Instrumentation
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
@@ -48,5 +50,25 @@ class MainActivityTest {
         Intents.intended(IntentMatchers.hasComponent(
             ComponentNameMatchers.hasClassName("android.the.coding.archer.espressotestingadv.IdeasActivity")
         ))
+    }
+
+    @Test
+    fun punnyIntending() {
+        val name = "Catalie Portman"
+        val intent = Intent()
+        intent.putExtra(IdeasActivity.KEY_NAME, name)
+
+        val result = Instrumentation.ActivityResult(Activity.RESULT_OK, intent)
+
+        val context = InstrumentationRegistry.getTargetContext()
+        val theme = context.getString(R.string.theme_punny)
+
+        Intents.intending(hasExtra(IdeasActivity.KEY_THEME, theme))
+            .respondWith(result)
+
+        onView(withId(R.id.button_punny))
+            .perform(click())
+        onView(withId(R.id.name))
+            .check(matches(withText(name)))
     }
 }
