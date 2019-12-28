@@ -3,6 +3,7 @@
           package="android.the.coding.archer.espressotestingadv">
 
     <application
+            android:name=".GreetingApplication"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
