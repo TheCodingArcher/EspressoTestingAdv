@@ -37,4 +37,18 @@ class IdeasActivityTest {
         onView(withId(R.id.theme))
             .check(matches(withText(theme)))
     }
+
+    @Test
+    fun unknown() {
+        val context = InstrumentationRegistry.getTargetContext()
+        val theme = "Silly"
+
+        val intent = Intent()
+        intent.putExtra(IdeasActivity.KEY_THEME, theme)
+        activityRule.launchActivity(intent)
+
+        val message = context.getString(R.string.unknown_theme, theme)
+        onView(withId(R.id.theme))
+            .check(matches(withText(message)))
+    }
 }
