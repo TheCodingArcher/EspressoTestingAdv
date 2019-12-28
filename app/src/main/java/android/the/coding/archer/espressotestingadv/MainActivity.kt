@@ -1,39 +1,26 @@
 package android.the.coding.archer.espressotestingadv
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.TextView
+import org.joda.time.DateTime
 
 class MainActivity : AppCompatActivity() {
-
-    private val REQUEST_CODE_IDEAS = 1
-    private lateinit var nameView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        nameView = findViewById(R.id.name)
-    }
+        val now = DateTime()
 
-    fun goToIdeaActivity(v: View) {
-        val button = v as Button
-
-        val intent = Intent(this, IdeasActivity::class.java)
-        intent.putExtra(IdeasActivity.KEY_THEME, button.text)
-
-        startActivityForResult(intent, REQUEST_CODE_IDEAS)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQUEST_CODE_IDEAS -> {
-                nameView.text = data?.getStringExtra(IdeasActivity.KEY_NAME)
-            }
-            else -> super.onActivityResult(requestCode, resultCode, data)
+        val greetingId = when (now.hourOfDay) {
+            in 5..12 -> R.string.greeting_morning
+            in 12..17 -> R.string.greeting_afternoon
+            in 17..23 -> R.string.greeting_evening
+            else -> R.string.greeting_night
         }
+
+        val greetingView = findViewById<TextView>(R.id.greeting)
+        greetingView.setText(greetingId)
     }
 }
