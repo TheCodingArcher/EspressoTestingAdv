@@ -2,6 +2,6 @@ package android.the.coding.archer.espressotestingadv
 
 import org.joda.time.DateTime
 
-class Clock {
-    fun getNow() = DateTime()
+open class Clock {
+    open fun getNow() = DateTime()
 }

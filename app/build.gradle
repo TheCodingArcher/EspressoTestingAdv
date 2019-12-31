@@ -36,5 +36,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
 
+    androidTestImplementation 'org.mockito:mockito-android:2.13.0'
+
     implementation 'joda-time:joda-time:2.9.9'
 }
