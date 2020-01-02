@@ -1,11 +1,5 @@
 package android.the.coding.archer.espressotestingadv
 
-import org.mockito.Mockito
-
 class TestApplication : GreetingApplication() {
-    private val clock: Clock by lazy {
-        Mockito.mock(Clock::class.java)
-    }
-
-    override fun provideClock() : Clock = clock
+    override lateinit var component: ApplicationComponent
 }
