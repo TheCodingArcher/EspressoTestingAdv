@@ -3,5 +3,9 @@ package android.the.coding.archer.espressotestingadv
 import android.app.Application
 
 open class GreetingApplication : Application() {
-    open fun provideClock(): Clock = Clock()
+    val component : ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder()
+            .clockModule(ClockModule)
+            .build()
+    }
 }
