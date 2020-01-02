@@ -21,8 +21,9 @@ class MainActivityTest {
 
     @Test
     fun evening() {
+        val clock = Mockito.mock(Clock::class.java)
         val app = InstrumentationRegistry.getTargetContext().applicationContext as TestApplication
-        val clock = app.provideClock()
+        app.component = DaggerTestComponent.builder().clock(clock).build()
         Mockito.`when`(clock.getNow()).thenReturn(DateTime().withHourOfDay(20))
 
         activityRule.launchActivity(null)
