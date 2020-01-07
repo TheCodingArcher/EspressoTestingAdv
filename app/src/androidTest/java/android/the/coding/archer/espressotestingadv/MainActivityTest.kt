@@ -1,6 +1,7 @@
 package android.the.coding.archer.espressotestingadv
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
@@ -17,7 +18,16 @@ class MainActivityTest {
 
     @Test
     fun done() {
+        val idlingResource = DialogFragmentIdlingResource(
+            activityRule.activity.supportFragmentManager,
+            LoadingDialogFragment.TAG
+        )
+
+        IdlingRegistry.getInstance().register(idlingResource)
+
         onView(withId(R.id.text))
             .check(matches(withText((R.string.done))))
+
+        IdlingRegistry.getInstance().unregister(idlingResource)
     }
 }
